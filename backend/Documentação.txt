@@ -25,14 +25,14 @@ Banco de dados:
         Name:
 
     Vendas:
-        id;
-        nome do cliente;
-        valor da venda;
-        forma de pagamento;
-        forma de entrega;
-        dia;
-        mes;
-        ano;
+        id
+        cliente
+        venda
+        pagamento
+        entrega
+        dia
+        mes
+        ano
 
 Colaboradores:
     Darlan Paz: 1b8dd5fa

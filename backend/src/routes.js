@@ -1,26 +1,21 @@
 const express = require('express');
-const crypto = require('crypto');
-const connetion = require('./database/connection');
+
+const ColaboradorController = require('./controllers/ColaboradorController');
+const VendasController = require('./controllers/VendaController');
+const ProfileController = require('./controllers/ProfileController');
+const SessionController = require('./controllers/SessionController');
 
 const routes = express.Router();
 
-routes.get('/colaboradores', async (request, response) => {
-    const colaboradores = await connetion('colaboradores').select('*');
+routes.post('/session', SessionController.create);
 
-    return response.json({colaboradores});
-});
+routes.get('/colaboradores', ColaboradorController.index);
+routes.post('/colaboradores', ColaboradorController.create);
 
-routes.post('/colaboradores', async (request, response) => {
-    const { name } = request.body;
+routes.get('/profile', ProfileController.index);
 
-    const id = crypto.randomBytes(4).toString('HEX');
-
-    await connetion('colaboradores').insert({
-        id,
-        name
-    });
-    
-    return response.json({ id });
-});
+routes.get('/vendas', VendasController.index);
+routes.post('/vendas', VendasController.create);
+routes.delete('/vendas/:id', VendasController.delete);
 
 module.exports = routes;
