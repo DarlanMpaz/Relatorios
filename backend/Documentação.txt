@@ -1,4 +1,4 @@
-Parei no video 1:01:51
+Parei no video 1:20:06
 
 Tipos de parâmetros:
     Query params: Parâmetros nomeadeos enviados na rota após o "?" (filtros, paginação) ex.: /users?name=Darlan;
