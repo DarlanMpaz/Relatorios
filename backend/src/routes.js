@@ -22,6 +22,12 @@ routes.get('/vendas-all', VendasController.indexAll);
 routes.post('/filter-date', VendasController.filterDate);
 
 routes.post('/count-venda', VendasController.countVenda);
-routes.post('/count-pagamento', VendasController.countPagamento);
+routes.post('/count-prazo', VendasController.countPrazo);
+routes.post('/count-avista', VendasController.countAvista);
+routes.post('/count-cartao', VendasController.countCartao);
+
+routes.post('/sum-cartao', VendasController.sumCartao);
+routes.post('/sum-prazo', VendasController.sumPrazo);
+routes.post('/sum-avista', VendasController.sumAvista);
 
 module.exports = routes;

@@ -71,29 +71,33 @@ export default function NovaVenda() {
                         placeholder="Nome do dliente" 
                         value={cliente}
                         onChange={e => setCliente(e.target.value)}
+                        required
                         />
 
                     <input 
                         placeholder="Valor da venda" 
                         value={venda}
                         onChange={e => setVenda(e.target.value)}
+                        required
                         />
 
                     <label htmlFor="forma-pgto">Forma de pagamento</label>
-                    <select name="forma-pgto"
+                    <select name="forma-pgto" required
                         value={pagamento}
                         onChange={e => setPagamento(e.target.value)}
                         >
-                        <option value="avista">À vista</option>
+                        <option value="" disabled selected>Forma de pagamento</option>
+                        <option selected value="avista">À vista</option>
                         <option value="aprazo">À prazo</option>
                         <option value="cartao">Cartão</option>
                     </select>
 
                     <label htmlFor="forma-entrega">Forma de entrega</label>
-                    <select name="forma-entrega"
+                    <select name="forma-entrega" required
                         value={entrega}
                         onChange={e => setEntrega(e.target.value)}
                         >
+                        <option value="" disabled selected>Forma de Entrega</option>
                         <option value="t5">T5 - R$5,00</option>
                         <option value="t10">T10 - R$10,00</option>
                         <option value="t15">T15 - R$15,00</option>

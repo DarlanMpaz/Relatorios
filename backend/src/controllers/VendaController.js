@@ -21,26 +21,12 @@ module.exports = {
     },
 
     async indexAll(request, response) {
-        const { page = 1 } = request.query;
-
         const [count] = await connection('vendas')
             .count();
 
-            console.log(count);
-
-            const now = new Date();
-            const dia = now.getDate();
-            const mes = now.getMonth()+1;
-            const ano = now.getFullYear();
-
         const vendas = await connection('vendas')
             .join('colaboradores', 'colaboradores.id', '=', 'vendas.colaborador_id')
-            .limit(5)
-            .offset((page-1)*5)
             .select(['vendas.*', 'colaboradores.name'])
-            .where('dia', dia)
-            .andWhere('mes', mes)
-            .andWhere('ano', ano);
        
             response.header('X-Total-Count', count['count(*)']);
 
@@ -97,28 +83,6 @@ module.exports = {
        return response.json({ sumVenda });
     },
 
-    async countPagamento(request, response) {
-        const { day, month, year } = request.body;
-
-        const [count] = await connection('vendas')
-            .count();
-
-            console.log(count);
-
-            const dia = day;
-            const mes = month;
-            const ano = year;
-
-        const sumPagamento = await connection('vendas')
-            .select('vendas.pagamento')
-            .where({'pagamento': 'aprazo'})
-            .count();
-       
-            response.header('X-Total-Count', count['count(*)']);
-
-       return response.json({ sumPagamento });
-    },
-
     async create(request, response) {
         const { 
             cliente, 
@@ -162,5 +126,161 @@ module.exports = {
         await connection('vendas').where('id', id).delete();
 
         return response.status(204).send();
-    }
+    },
+
+
+
+
+    async countPrazo(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const countPrazo = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'aprazo'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .count();
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {countPrazo} );
+    },
+
+    async countAvista(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const countAvista = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'avista'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .count();
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {countAvista} );
+    },
+
+    async countCartao(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const countCartao = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'cartao'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .count();
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {countCartao} );
+    },
+
+
+
+
+    async sumPrazo(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const sumPrazo = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'aprazo'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .sum('venda');
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {sumPrazo} );
+    },
+
+    async sumAvista(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const sumAvista = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'avista'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .sum('venda');
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {sumAvista} );
+    },
+
+    async sumCartao(request, response) {
+        const { day, month, year } = request.body;
+
+        const [count] = await connection('vendas')
+            .count();
+
+            console.log(count);
+
+            const dia = day;
+            const mes = month;
+            const ano = year;
+
+        const sumCartao = await connection('vendas')
+            .select('vendas.pagamento')
+            .where({'pagamento': 'cartao'})
+            .andWhere('dia', dia)
+            .andWhere('mes', mes)
+            .andWhere('ano', ano)
+            .sum('venda');
+       
+            response.header('X-Total-Count', count['count(*)']);
+
+       return response.json( {sumCartao} );
+    },
 };
