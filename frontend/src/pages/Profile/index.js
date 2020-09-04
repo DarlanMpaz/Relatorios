@@ -1,18 +1,22 @@
+/**REACT */
 import React, {useState, useEffect} from 'react';
+/**REACT ROUTER DOM*/
 import { Link, useHistory } from 'react-router-dom';
-import { FiPower, FiTrash2 } from 'react-icons/fi';
-
+/**REACT ICONS*/
+import { FiPower, FiTrash2, FiLogIn } from 'react-icons/fi';
+/**API */
 import api from '../../services/api';
-
+/**STYLES */
 import './styles.css';
-
+/**IMAGES */
 import logoImg from '../../assets/logo.png';
 
 export default function Profile() {
-    const [vendas, setVendas] = useState([]);
 
+    const [vendas, setVendas] = useState([]);
     const history = useHistory();
 
+    /**LOCAL STORAGE*/
     const colaborador_id = localStorage.getItem('colaborador_id');
     const colaborador_name = localStorage.getItem('colaborador_name');
 
@@ -26,7 +30,7 @@ export default function Profile() {
         })
     }, [colaborador_id]);
 
-    //DELETAR
+    //HANDLE DELET
     async function handleDeleteVenda(id) {
         try {
             await api.delete(`vendas/${id}`, {
@@ -42,17 +46,36 @@ export default function Profile() {
         }
     }
 
+    /**HANDLE LOGOUT */
     function handleLogout() {
         localStorage.clear();
 
         history.push('/');
     }
 
+    function testuser() {
+        if (colaborador_id === "c983430f") {
+            return(
+            <Link className="button2" to="/register">
+                Novo Colaborador
+            </Link>);
+        }
+    }
+
+    /**JSX */
     return(
         <div className="profile-container">
+
             <header>
+
                 <img src={logoImg} alt="Logo"/>
+
                 <span>Bem vindo(a), {colaborador_name}</span>
+
+                {/** BOTAO NOVO COLABORADOR */}
+                {testuser()}
+
+                { /** BOTAO NOVA VENDA */ }
                 <Link className="button" to="/vendas/nova">Registrar nova venda</Link>
 
                 <button onClick={handleLogout} type="button">

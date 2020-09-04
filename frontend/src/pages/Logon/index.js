@@ -1,18 +1,23 @@
+/**REACT */
 import React, {useState} from 'react';
+/**REACT ROUTER DOM*/
 import { Link, useHistory } from 'react-router-dom';
+/**REACT ICONS*/
 import { FiLogIn } from 'react-icons/fi';
-
+/**API */
 import api from '../../services/api';
-
+/**STYLES */
 import './styles.css';
-
+/**IMAGENS */
 import logonImage from '../../assets/vendas.png';
 import logoImg from '../../assets/logo.png';
 
 export default function Logon() {
+
     const [id, setId] = useState('');
     const history = useHistory();
 
+    /**HANDLE */
     async function handleLogin(e) {
         e.preventDefault();
 
@@ -28,23 +33,27 @@ export default function Logon() {
         }
     }
 
+    /**JSX */
     return (
         <div className="logon-container">
+
             <section className="form">
                 <img src={logoImg} alt="Logo" />
+
                 <form onSubmit={handleLogin}>
+
                     <h1>Bem vindo, faça seu login.</h1>
+
                     <input 
                         placeholder="Seu código"
                         value={id}
                         onChange={e => setId(e.target.value)}
                         />
+
                     <button className="button" type="submit">Entrar</button>
-                    <Link className="back-link" to="/register">
-                        <FiLogIn size="16" color="#c62430" />
-                        Não tenho cadastro
-                    </Link>
+
                 </form>
+
             </section>
 
             <img src={logonImage} alt="Logon" />

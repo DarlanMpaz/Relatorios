@@ -21,11 +21,20 @@ export default function NovaVenda() {
     async function handleNovaVenda(e) {
         e.preventDefault();
 
+        const now = new Date();
+
+        const dia = now.getDate();
+        const mes = now.getMonth()+1;
+        const ano = now.getFullYear();
+
         const data = {
             cliente,
             venda,
             pagamento,
             entrega,
+            dia,
+            mes,
+            ano
         };
 
         try {
@@ -61,19 +70,19 @@ export default function NovaVenda() {
                     <input 
                         placeholder="Nome do dliente" 
                         value={cliente}
-                        onchange={e => setCliente(e.target.value)}
+                        onChange={e => setCliente(e.target.value)}
                         />
 
                     <input 
                         placeholder="Valor da venda" 
                         value={venda}
-                        onchange={e => setVenda(e.target.value)}
+                        onChange={e => setVenda(e.target.value)}
                         />
 
                     <label htmlFor="forma-pgto">Forma de pagamento</label>
                     <select name="forma-pgto"
                         value={pagamento}
-                        onchange={e => setPagamento(e.target.value)}
+                        onChange={e => setPagamento(e.target.value)}
                         >
                         <option value="avista">À vista</option>
                         <option value="aprazo">À prazo</option>
@@ -83,7 +92,7 @@ export default function NovaVenda() {
                     <label htmlFor="forma-entrega">Forma de entrega</label>
                     <select name="forma-entrega"
                         value={entrega}
-                        onchange={e => setEntrega(e.target.value)}
+                        onChange={e => setEntrega(e.target.value)}
                         >
                         <option value="t5">T5 - R$5,00</option>
                         <option value="t10">T10 - R$10,00</option>
