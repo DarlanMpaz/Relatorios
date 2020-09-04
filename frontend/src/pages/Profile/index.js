@@ -85,19 +85,22 @@ export default function Profile() {
             </header>
 
             <h1>Vendas registradas - <span>02/09/2020</span></h1>
-                <ul>
+                {/* <ul>
+                    <li>
+                        <strong>Cliente:</strong>
+                        <strong>Valor da venda:</strong>
+                        <strong>Forma de pagamento:</strong>
+                        <strong>Forma de entrega:</strong>
+                    </li>
                     {vendas.map(venda => (
                     <li key={venda.id}>
-                        <strong>Cliente:</strong>
+                        
                         <p>{venda.cliente}</p>
-
-                        <strong>Valor da venda:</strong>
+                        
                         <p>{Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'}).format(venda.venda)}</p>
-
-                        <strong>Forma de pagamento:</strong>
+                        
                         <p>{venda.pagamento}</p>
-
-                        <strong>Forma de entrega:</strong>
+                        
                         <p>{venda.entrega}</p>
 
                         <button onClick={() => handleDeleteVenda(venda.id)} type="button">
@@ -105,7 +108,49 @@ export default function Profile() {
                         </button>
                     </li>
                     ))}
-                </ul>
+                </ul> */}
+                <table>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Valor da venda</th>
+                        <th>Forma de pagamento</th>
+                        <th>Forma de entrega</th>
+                        <th></th>
+                    </tr>
+                    {vendas.map(venda => (
+                        <tr>
+                            <td>{venda.cliente}</td>
+                            <td>{venda.venda}</td>
+                            <td>{venda.pagamento}</td>
+                            <td>{venda.entrega}</td>
+                            <td>
+                                <button onClick={() => handleDeleteVenda(venda.id)} type="button">
+                                    <FiTrash2 size={20} color="#000" />
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                        <tr>
+                            <td>
+
+                            </td>
+                            <td>R$ 100,00</td>
+                            <td>
+                                <ul>
+                                    <li>A vista: 5 - 10,00</li>
+                                    <li>A prazo: 10 - 20,00</li>
+                                    <li>cartao: 15 - 30,00</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>T5: 5 - 10,00</li>
+                                    <li>T10: 10 - 20,00</li>
+                                    <li>T15: 15 - 30,00</li>
+                                </ul>
+                            </td>
+                        </tr>
+                </table>
         </div>
     );
 };
